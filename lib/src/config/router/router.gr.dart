@@ -25,3 +25,19 @@ class CharactersListRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [MainWrapperScreen]
+class MainWrapperRoute extends PageRouteInfo<void> {
+  const MainWrapperRoute({List<PageRouteInfo>? children})
+    : super(MainWrapperRoute.name, initialChildren: children);
+
+  static const String name = 'MainWrapperRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainWrapperScreen();
+    },
+  );
+}

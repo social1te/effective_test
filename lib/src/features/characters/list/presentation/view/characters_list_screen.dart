@@ -89,15 +89,11 @@ class _CharactersListViewState extends State<CharactersListView> {
                   itemCount: state.characters.length + (state.hasMore ? 1 : 0),
                   itemBuilder: (context, index) {
                     if (index == state.characters.length) {
-                      return const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Center(child: LinearProgressIndicator(
-                          color: AppColors.guacamole,
-                          backgroundColor: Colors.lime,
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          minHeight: 12,
-                        )),
-                      );
+                      return Center(child: LinearProgressIndicator(
+                        color: AppColors.guacamole,
+                        backgroundColor: Colors.lime,
+                        minHeight: 4,
+                      ));
                     }
         
                     final character = state.characters[index];
