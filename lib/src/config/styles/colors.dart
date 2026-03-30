@@ -3,7 +3,7 @@ import 'dart:ui';
 abstract class AppColors {
   const AppColors._();
 
-  static const cultured = Color(0xFFF5F6FA);
+  static const snowWhite = Color(0xFFF5F6FA);
   static const raisinBlack = Color(0xFF202022);
   static const charcoalBlack = Color(0xFF333333);
 
