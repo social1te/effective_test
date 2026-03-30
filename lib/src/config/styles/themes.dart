@@ -7,17 +7,15 @@ abstract class AppThemes {
 
   static final light = ThemeData(
     brightness: Brightness.light,
-    scaffoldBackgroundColor: AppColors.cultured,
-    extensions: [
-      ThemeColors.light(),
-    ]
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+    extensions: [ThemeColors.light()],
   );
 
   static final dark = ThemeData(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: AppColors.raisinBlack,
-    extensions: [
-      ThemeColors.dark(),
-    ]
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.charcoalBlack),
+    scaffoldBackgroundColor: AppColors.charcoalBlack,
+    extensions: [ThemeColors.dark()],
   );
 }

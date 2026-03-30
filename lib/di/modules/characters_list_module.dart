@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:effective_test_app/core/network/dio_provider.dart';
 import 'package:effective_test_app/src/common/utils/dotenv_util.dart';
 import 'package:effective_test_app/src/features/characters/list/data/datasources/api/characters_list_api.dart';
 import 'package:effective_test_app/src/features/characters/list/data/datasources/characters_list_remote_data_source.dart';
@@ -10,9 +8,6 @@ import 'package:effective_test_app/src/features/characters/list/presentation/blo
 import 'package:get_it/get_it.dart';
 
 void charactersListModule(GetIt getIt) {
-
-  getIt.registerLazySingleton<Dio>(dioProvider);
-
   getIt.registerLazySingleton<CharactersListApi>(
     () => CharactersListApi(getIt(), baseUrl: Env.get('BASE_URL')),
   );
