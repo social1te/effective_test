@@ -1,8 +1,8 @@
 enum SortingModel {
-  nameAsc('Name A-Z'),
-  nameDesc('Name Z-A'),
-  status('Status'),
-  recentlyAdded('Recently Added');
+  nameAsc('Имя A-Z'),
+  nameDesc('Имя Z-A'),
+  status('Статус'),
+  recentlyAdded('Недавно добавленные');
 
   final String label;
   const SortingModel(this.label);
