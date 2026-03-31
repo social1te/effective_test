@@ -88,6 +88,6 @@ Flutter-приложение для просмотра персонажей из
 ---
 
 ## 🛠 Установка и запуск
-git clone [<repository-url>](https://github.com/social1te/effective_test/)](https://github.com/social1te/effective_test/)
+git clone (https://github.com/social1te/effective_test/)](https://github.com/social1te/effective_test/)
 cd ПапкаПроекта
 flutter run
