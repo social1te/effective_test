@@ -94,87 +94,100 @@ class _CharactersListViewState extends State<CharactersListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<CharactersListBloc, CharactersListState>(
-          builder: (context, state) {
-            if (state is CharactersListInitial ||
-                state is CharactersListLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-        
-            if (state is CharactersListError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.error_outline, size: 48, color: context.colorExt.negativeIndicatorColor),
-                    const SizedBox(height: 16),
-                    Text(
-                      state.message,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.red),
+      appBar: AppBar(
+        title: Text('Персонажи'),
+      ),
+      body: BlocBuilder<CharactersListBloc, CharactersListState>(
+        builder: (context, state) {
+          if (state is CharactersListInitial ||
+              state is CharactersListLoading) {
+            return Center(
+              child: CircleAvatar(
+                radius: 24,
+                backgroundColor: context.colorExt.accentColor,
+                child: CircularProgressIndicator(color: Colors.lime),
+              ),
+            );
+          }
+
+          if (state is CharactersListError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 48,
+                    color: context.colorExt.negativeIndicatorColor,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    state.message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                  const SizedBox(height: 16),
+                  if (state.canRetry)
+                    ElevatedButton(
+                      onPressed: () {
+                        context.read<CharactersListBloc>().add(
+                          LoadCharactersEvent(page: 1),
+                        );
+                      },
+                      child: const Text('Retry'),
                     ),
-                    const SizedBox(height: 16),
-                    if (state.canRetry)
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<CharactersListBloc>().add(
-                            LoadCharactersEvent(page: 1),
-                          );
-                        },
-                        child: const Text('Retry'),
-                      ),
-                  ],
-                ),
-              );
+                ],
+              ),
+            );
+          }
+
+          if (state is CharactersListLoaded) {
+            if (state.characters.isEmpty) {
+              return const Center(child: Text('No characters found'));
             }
-        
-            if (state is CharactersListLoaded) {
-              if (state.characters.isEmpty) {
-                return const Center(child: Text('No characters found'));
-              }
-        
-              return BlocBuilder<FavoritesBloc, FavoritesState>(
-                bloc: _favoritesBloc,
-                builder: (context, favoritesState) {
-                  return RefreshIndicator(
-                    backgroundColor: context.colorExt.accentColor,
-                    color: Colors.lime,
-                    onRefresh: _onRefresh,
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount:
-                          state.characters.length + (state.hasMore ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index == state.characters.length) {
-                          return Center(child: LinearProgressIndicator(
+
+            return BlocBuilder<FavoritesBloc, FavoritesState>(
+              bloc: _favoritesBloc,
+              builder: (context, favoritesState) {
+                return RefreshIndicator(
+                  backgroundColor: context.colorExt.accentColor,
+                  color: Colors.lime,
+                  onRefresh: _onRefresh,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    itemCount:
+                        state.characters.length + (state.hasMore ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == state.characters.length) {
+                        return Center(
+                          child: LinearProgressIndicator(
                             color: context.colorExt.accentColor,
                             backgroundColor: Colors.lime,
                             minHeight: 4,
-                          ));
-                        }
-        
-                        final character = state.characters[index];
-                        final isFav =
-                            favoritesState is FavoritesLoaded &&
-                            favoritesState.favoriteIds.contains(character.id);
-        
-                        return CharacterTile(
-                          character: character,
-                          isFavorite: isFav,
-                          showFavoriteButton: true,
-                          onToggleFavorite: () => _toggleFavorite(character.id),
+                          ),
                         );
-                      },
-                    ),
-                  );
-                },
-              );
-            }
-        
-            return const SizedBox.shrink();
-          },
-        ),
+                      }
+
+                      final character = state.characters[index];
+                      final isFav =
+                          favoritesState is FavoritesLoaded &&
+                          favoritesState.favoriteIds.contains(character.id);
+
+                      return CharacterTile(
+                        character: character,
+                        isFavorite: isFav,
+                        showFavoriteButton: true,
+                        onToggleFavorite: () => _toggleFavorite(character.id),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+          }
+
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

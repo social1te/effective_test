@@ -4,6 +4,7 @@ import 'package:effective_test_app/src/features/characters/list/presentation/vie
 import 'package:effective_test_app/src/features/favorites/presentation/bloc/favorites_bloc.dart';
 import 'package:effective_test_app/src/features/favorites/presentation/bloc/favorites_event.dart';
 import 'package:effective_test_app/src/features/favorites/presentation/bloc/favorites_state.dart';
+import 'package:effective_test_app/src/features/favorites/presentation/widgets/animated_favorite_tile.dart';
 import 'package:effective_test_app/src/features/favorites/presentation/widgets/sorting_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class _FavoritesView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text('Избранное'),
         actions: const [SortingWidget()],
       ),
       body: SafeArea(
@@ -70,7 +72,7 @@ class _FavoritesView extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'No favorites yet',
+                        'Избранных пока что нет',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -79,7 +81,7 @@ class _FavoritesView extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Add characters to favorites from the list',
+                        'Добавьте персонажей в избранное из списка',
                         style: TextStyle(
                           fontSize: 14,
                           color: themeColors.unknownIndicatorColor.withOpacity(0.7),
@@ -94,11 +96,10 @@ class _FavoritesView extends StatelessWidget {
                 itemCount: state.favorites.length,
                 itemBuilder: (context, index) {
                   final character = state.favorites[index];
-                  return CharacterTile(
+                  return AnimatedFavoriteTile(
+                    key: Key('fav-${character.id}'),
                     character: character,
-                    isFavorite: true,
-                    showFavoriteButton: true,
-                    onToggleFavorite: () {
+                    onRemove: () {
                       context.read<FavoritesBloc>().add(
                         FavoritesEvent.removeFavorite(character.id),
                       );

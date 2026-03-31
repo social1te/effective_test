@@ -1,5 +1,6 @@
 import 'package:effective_test_app/src/common/extensions/context_extensions.dart';
 import 'package:effective_test_app/src/features/characters/list/domain/models/character.dart';
+import 'package:effective_test_app/src/features/characters/list/presentation/view/widgets/animated_favorite_icon.dart';
 import 'package:flutter/material.dart';
 
 class CharacterTile extends StatelessWidget {
@@ -78,14 +79,9 @@ class CharacterTile extends StatelessWidget {
         ],
       ),
       trailing: showFavoriteButton
-          ? IconButton(
-        icon: Icon(
-          isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: isFavorite
-              ? context.colorExt.accentColor
-              : context.colorExt.unknownIndicatorColor,
-        ),
-        onPressed: onToggleFavorite,
+          ? AnimatedFavoriteIcon(
+        isFavorite: isFavorite,
+        onToggle: onToggleFavorite ?? () {},
       )
           : null,
       onTap: onTap,
