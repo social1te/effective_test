@@ -1,17 +1,94 @@
 # effective_test_app
 
-A new Flutter project.
+Flutter-приложение для просмотра персонажей из сериала "Rick & Morty" с функцией избранного, сортировкой и переключением темы.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Возможности
 
-A few resources to get you started if this is your first Flutter project:
+- 📋 **Список персонажей** — загрузка с пагинацией и pull-to-refresh
+- ❤️ **Избранное** — добавление/удаление персонажей с локальным сохранением (Hive)
+- 🔄 **Сортировка** — по имени (A-Z/Z-A), статусу, дате добавления
+- 🎨 **Темы** — светлая, тёмная, системная (сохранение в SharedPreferences)
+- ✨ **Анимации** — плавное добавление/удаление из избранного
+- 📱 **Адаптивность** — плавающий BottomNavigationBar
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Требования
+
+| Зависимость | Версия | Примечание |
+|-------------|--------|------------|
+| **Flutter** | `>=3.41.1` | Stable channel |
+| **Dart** | `>=3.11.0` | Входит в состав Flutter |
+| **iOS** | `>=13.0` | Требуется Xcode 15+ |
+| **Android** | `minSdk 21` | API 21 (Android 5.0+), Java 17 |
+| **macOS** | Apple Silicon / Intel | Для сборки под iOS |
+
+---
+
+## 📦 Зависимости
+
+### 🌐 Сеть
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `dio` | `^5.9.2` | HTTP-клиент для запросов к API |
+| `retrofit` | `^4.9.2` | Type-safe REST client на основе Dio |
+| `retrofit_generator` | `^10.2.3` | Codegen для Retrofit |
+| `pretty_dio_logger` | `^1.4.0` | Логирование запросов в консоли |
+
+### 🧠 Управление состоянием
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `flutter_bloc` | `^9.1.1` | Реактивное управление состоянием (BLoC) |
+| `get_it` | `^9.2.1` | Service Locator для внедрения зависимостей |
+| `rxdart` | `^0.28.0` | Расширения для Stream и реактивных операций |
+
+### 🧭 Навигация
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `auto_route` | `^11.1.0` | Декларативная типобезопасная навигация |
+| `auto_route_generator` | `^10.5.0` | Codegen для AutoRoute |
+
+### 💾 Локальное хранилище
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `hive_ce` | `^2.19.3` | Быстрая NoSQL база данных (избранное) |
+| `path_provider` | `^2.1.5` | Получение путей к файловой системе |
+| `shared_preferences` | `^2.5.5` | Хранение простых настроек (тема) |
+
+### 🔧 Генерация кода
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `freezed` | `^3.2.5` | Codegen для immutable-классов и union-типов |
+| `freezed_annotation` | `^3.1.0` | Аннотации для Freezed |
+| `json_serializable` | `^6.13.1` | Сериализация JSON ↔ Dart |
+| `json_annotation` | `^4.11.0` | Аннотации для JSON-сериализации |
+| `build_runner` | `^2.13.1` | Запуск code generators |
+
+### 📄 UI & Утилиты
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `infinite_scroll_pagination` | `^5.1.1` | Пагинация с бесконечным скроллом |
+| `flutter_dotenv` | `^6.0.0` | Загрузка переменных окружения из `.env` |
+| `cupertino_icons` | `^1.0.8` | iOS-стильные иконки |
+
+### 🧪 Разработка
+
+| Пакет | Версия | Назначение |
+|-------|--------|------------|
+| `flutter_test` | `sdk:flutter` | Фреймворк для тестирования |
+| `flutter_lints` | `^6.0.0` | Рекомендуемые правила линтинга |
+
+---
+
+## 🛠 Установка и запуск
+git clone <repository-url>
+cd <project-folder>
+flutter run
